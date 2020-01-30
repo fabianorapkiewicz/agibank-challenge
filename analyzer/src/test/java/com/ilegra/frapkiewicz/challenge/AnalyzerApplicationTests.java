@@ -1,4 +1,4 @@
-package com.ilegra.frapkiewicz.challenge.analyzer;
+package com.ilegra.frapkiewicz.challenge;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

@@ -1,4 +1,4 @@
-package com.ilegra.frapkiewicz.challenge.analyzer;
+package com.ilegra.frapkiewicz.challenge;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -9,5 +9,4 @@ public class AnalyzerApplication {
 	public static void main(String[] args) {
 		SpringApplication.run(AnalyzerApplication.class, args);
 	}
-
 }
