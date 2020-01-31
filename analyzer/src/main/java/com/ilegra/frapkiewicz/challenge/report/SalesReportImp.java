@@ -42,6 +42,14 @@ public class SalesReportImp implements SalesReport {
 	public void add(Sale sale) {
 		saleList.add(sale);
 	}
+	
+	@Override
+	public String getResume() {
+		
+		
+		
+		return "";
+	}
 
 	@Override
 	public String toString() {

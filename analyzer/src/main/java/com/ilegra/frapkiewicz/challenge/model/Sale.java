@@ -92,6 +92,47 @@ public class Sale extends ReportData{
 	public String toString() {
 		return "Sale [id=" + id + ", saleId=" + saleId + ", saleItems=" + saleItems + ", salesname=" + salesname + "]";
 	}
-	
-	
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((id == null) ? 0 : id.hashCode());
+		result = prime * result + ((saleId == null) ? 0 : saleId.hashCode());
+		result = prime * result + ((saleItems == null) ? 0 : saleItems.hashCode());
+		result = prime * result + ((salesname == null) ? 0 : salesname.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Sale other = (Sale) obj;
+		if (id == null) {
+			if (other.id != null)
+				return false;
+		} else if (!id.equals(other.id))
+			return false;
+		if (saleId == null) {
+			if (other.saleId != null)
+				return false;
+		} else if (!saleId.equals(other.saleId))
+			return false;
+		if (saleItems == null) {
+			if (other.saleItems != null)
+				return false;
+		} else if (!saleItems.equals(other.saleItems))
+			return false;
+		if (salesname == null) {
+			if (other.salesname != null)
+				return false;
+		} else if (!salesname.equals(other.salesname))
+			return false;
+		return true;
+	}
 }
