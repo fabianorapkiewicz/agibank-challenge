@@ -1,4 +1,7 @@
-package com.ilegra.frapkiewicz.challenge;
+package com.ilegra.frapkiewicz.challenge.parser;
+
+import com.ilegra.frapkiewicz.challenge.model.ReportData;
+import com.ilegra.frapkiewicz.challenge.model.Salesman;
 
 public class SalesmanParser extends SalesReportParser {
 
@@ -14,13 +17,13 @@ public class SalesmanParser extends SalesReportParser {
 			REGEX_NAME + REGEX_DELIMITER + 
 			REGEX_SALARY;
 	
-	public SalesmanParser(SalesReport report) {
-		super(report, SALESMAN_REGEX);
+	public SalesmanParser() {
+		super(SALESMAN_REGEX);
 	}
 	
 	@Override
-	protected void parseAndRegisterReportData(String data) {
-		String[] elements = data.split(REGEX_DELIMITER);
+	protected ReportData parse(String value) {
+		String[] elements = value.split(REGEX_DELIMITER);
 		
 		Salesman salesman = new Salesman();
 		salesman.setId(elements[0]);
@@ -28,6 +31,6 @@ public class SalesmanParser extends SalesReportParser {
 		salesman.setName(elements[2]);
 		salesman.setSalary(Double.valueOf(elements[3]));
 		
-		getReport().add(salesman);
+		return salesman;
 	}
 }

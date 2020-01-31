@@ -1,7 +1,12 @@
-package com.ilegra.frapkiewicz.challenge;
+package com.ilegra.frapkiewicz.challenge.parser;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.ilegra.frapkiewicz.challenge.model.ReportData;
+import com.ilegra.frapkiewicz.challenge.model.Sale;
+import com.ilegra.frapkiewicz.challenge.model.SaleItem;
+import com.ilegra.frapkiewicz.challenge.report.SalesReport;
 
 public class SaleParser extends SalesReportParser {
 	private static final String REGEX_SALES_ID = "003";
@@ -20,12 +25,12 @@ public class SaleParser extends SalesReportParser {
 
 	
 	public SaleParser(SalesReport report) {
-		super(report, SALE_REGEX);
+		super(SALE_REGEX);
 	}
 
 
 	@Override
-	protected void parseAndRegisterReportData(String data) {
+	protected ReportData parse(String data) {
 		String[] elements = data.split(REGEX_DELIMITER);
 		
 		Sale sale = new Sale();
@@ -34,7 +39,7 @@ public class SaleParser extends SalesReportParser {
 		sale.setSaleItems(parseSaleItems(elements[2]));
 		sale.setSalesname(elements[3]);
 		
-		getReport().add(sale);
+		return sale;
 	}
 	
 	private List<SaleItem> parseSaleItems(String reportData) {

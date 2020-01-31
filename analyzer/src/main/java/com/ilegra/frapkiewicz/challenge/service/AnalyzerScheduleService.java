@@ -1,4 +1,4 @@
-package com.ilegra.frapkiewicz.challenge;
+package com.ilegra.frapkiewicz.challenge.service;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -12,7 +12,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 @EnableScheduling
-public class AnalyzerScheduleController {
+public class AnalyzerScheduleService {
 
 	private static final long FIVE_SECONDS = 5000;
 

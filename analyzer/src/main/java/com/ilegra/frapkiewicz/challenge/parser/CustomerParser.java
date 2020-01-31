@@ -1,4 +1,8 @@
-package com.ilegra.frapkiewicz.challenge;
+package com.ilegra.frapkiewicz.challenge.parser;
+
+import com.ilegra.frapkiewicz.challenge.model.Customer;
+import com.ilegra.frapkiewicz.challenge.model.ReportData;
+import com.ilegra.frapkiewicz.challenge.report.SalesReport;
 
 public class CustomerParser extends SalesReportParser {
 
@@ -19,11 +23,11 @@ public class CustomerParser extends SalesReportParser {
 
 	
 	public CustomerParser(SalesReport report) {
-		super(report, CUSTOMER_REGEX);
+		super(CUSTOMER_REGEX);
 	}
 
 	@Override
-	protected void parseAndRegisterReportData(String data) {
+	protected ReportData parse(String data) {
 		String[] elements = data.split(REGEX_DELIMITER);
 		
 		Customer customer = new Customer();
@@ -32,7 +36,7 @@ public class CustomerParser extends SalesReportParser {
 		customer.setName(elements[2]);
 		customer.setBusinessArea(elements[3]);
 		
-		getReport().add(customer);
+		return customer;
 	}
 
 }

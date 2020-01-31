@@ -1,6 +1,10 @@
-package com.ilegra.frapkiewicz.challenge;
+package com.ilegra.frapkiewicz.challenge.report;
 
 import org.springframework.stereotype.Component;
+
+import com.ilegra.frapkiewicz.challenge.model.Customer;
+import com.ilegra.frapkiewicz.challenge.model.Sale;
+import com.ilegra.frapkiewicz.challenge.model.Salesman;
 
 @Component
 public class SalesReportImp implements SalesReport {
