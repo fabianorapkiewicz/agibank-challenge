@@ -80,4 +80,11 @@ public class Customer extends ReportData{
 			return null;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Customer [id=" + id + ", cnpj=" + cnpj + ", name=" + name + ", businessArea=" + businessArea + "]";
+	}
+	
+	
 }

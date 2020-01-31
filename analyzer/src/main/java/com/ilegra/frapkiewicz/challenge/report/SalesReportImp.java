@@ -1,5 +1,8 @@
 package com.ilegra.frapkiewicz.challenge.report;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.stereotype.Component;
 
 import com.ilegra.frapkiewicz.challenge.model.Customer;
@@ -9,19 +12,38 @@ import com.ilegra.frapkiewicz.challenge.model.Salesman;
 @Component
 public class SalesReportImp implements SalesReport {
 
+	private List<Salesman> salesmanList;
+	private List<Customer> customerList;
+	private List<Sale> saleList;
+	
+	
+	public SalesReportImp() {
+		salesmanList = new ArrayList<Salesman>();
+		customerList = new ArrayList<Customer>();
+		saleList = new ArrayList<Sale>();
+	}
+	
 	@Override
 	public void add(Salesman salesman) {
-		System.out.println(salesman);
+		salesmanList.add(salesman);
 	}
 
 	@Override
 	public void add(Customer customer) {
-		System.out.println(customer);
+		customerList.add(customer);
 	}
 
 	@Override
 	public void add(Sale sale) {
-		System.out.println(sale);
+		saleList.add(sale);
 	}
+
+	@Override
+	public String toString() {
+		return "SalesReportImp [salesmanList=" + salesmanList + ", customerList=" + customerList + ", saleList="
+				+ saleList + "]";
+	}
+	
+	
 
 }

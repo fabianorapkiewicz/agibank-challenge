@@ -24,10 +24,15 @@ public class AnalyzerScheduleService {
 		System.out.println("INICIO DE CLICO");
 		
 		List<String> events = new ArrayList<String>();
-		events.add("sales-man");
-		events.add("customer");
-		events.add("sale_");
+		events.add("001ç1234567891234çPedroç50000");
+		events.add("002ç2345675434544345çJose da SilvaçRural");
+		events.add("003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro");
+		
 		events.forEach(processEvents(analyzer));
+		
+		System.out.println("-------------RELATÓRIO--------------");
+		System.out.println(analyzer.getReport());
+		System.out.println("------------------------------------");
 		
 		System.out.println("FIM DE CLICO");
 	}

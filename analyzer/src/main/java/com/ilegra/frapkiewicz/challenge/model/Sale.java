@@ -87,4 +87,11 @@ public class Sale extends ReportData{
 		
 		return saleItemList;
 	}
+
+	@Override
+	public String toString() {
+		return "Sale [id=" + id + ", saleId=" + saleId + ", saleItems=" + saleItems + ", salesname=" + salesname + "]";
+	}
+	
+	
 }

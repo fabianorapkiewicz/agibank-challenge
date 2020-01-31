@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ilegra.frapkiewicz.challenge.report.SalesReport;
+import com.ilegra.frapkiewicz.challenge.report.SalesReportImp;
 import com.ilegra.frapkiewicz.challenge.report.writter.CustomerWritter;
 import com.ilegra.frapkiewicz.challenge.report.writter.ReportWritter;
 import com.ilegra.frapkiewicz.challenge.report.writter.SaleWritter;
@@ -19,9 +20,8 @@ public class Analyzer {
 
 	private List<ReportWritter> witterList;
 	
-	@Autowired
-	public Analyzer(SalesReport report) {
-		this.report = report;
+	public Analyzer() {
+		report = new SalesReportImp();
 		witterList = new ArrayList<ReportWritter>();
 		attach(new SalesmanWritter(report));
 		attach(new CustomerWritter(report));
@@ -46,5 +46,9 @@ public class Analyzer {
 			.forEach( writter -> {
 				writter.update(event);
 			});
+	}
+	
+	public SalesReport getReport() {
+		return report;
 	}
 }

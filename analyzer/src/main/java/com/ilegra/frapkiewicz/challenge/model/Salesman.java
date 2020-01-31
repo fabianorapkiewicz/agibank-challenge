@@ -72,4 +72,11 @@ public class Salesman extends ReportData{
 			return null;
 		}
 	}
+
+	@Override
+	public String toString() {
+		return "Salesman [id=" + id + ", cpf=" + cpf + ", name=" + name + ", salary=" + salary + "]";
+	}
+	
+	
 }
