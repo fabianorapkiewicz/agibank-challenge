@@ -6,17 +6,17 @@ import org.springframework.stereotype.Component;
 public class SalesReportImp implements SalesReport {
 
 	@Override
-	public void addSalesman(String salesman) {
+	public void add(Salesman salesman) {
 		System.out.println(salesman);
 	}
 
 	@Override
-	public void addCustomer(String customer) {
+	public void add(Customer customer) {
 		System.out.println(customer);
 	}
 
 	@Override
-	public void addSale(String sale) {
+	public void add(Sale sale) {
 		System.out.println(sale);
 	}
 
