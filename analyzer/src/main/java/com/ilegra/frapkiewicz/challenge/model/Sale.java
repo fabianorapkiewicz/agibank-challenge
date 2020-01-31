@@ -53,6 +53,12 @@ public class Sale extends ReportData{
 		this.salesname = salesname;
 	}
 	
+	public Double getSalesValue() {
+		return saleItems.stream()
+				.map(SaleItem::getTotalSalesValue)
+				.reduce(0.0, Double::sum); 
+	}
+	
 	public static Sale from(String data) {
 		String REGEX_SALES_ID = "003";
 		String REGEX_SALE_ID = "\\d{2}";

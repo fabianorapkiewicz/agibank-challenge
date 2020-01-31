@@ -1,7 +1,10 @@
 package com.ilegra.frapkiewicz.challenge.report;
 
 import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.List;
+import java.util.Map.Entry;
+import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
 
@@ -46,9 +49,29 @@ public class SalesReportImp implements SalesReport {
 	@Override
 	public String getResume() {
 		
+		Integer numberOfSalesman = salesmanList.size();
+		Integer numberOfCustomer = customerList.size();
 		
-		
-		return "";
+		Sale mostExpensiveSale = saleList.stream()
+				.sorted(Comparator.comparing(Sale::getSalesValue)
+						.reversed())
+				.collect(Collectors.toList())
+				.stream()
+				.findFirst()
+				.get();
+				
+		Entry<String, Long> worstSalesman = saleList.stream()
+				.collect(Collectors.groupingBy(Sale::getSalesname , Collectors.counting()))
+				.entrySet()
+				.stream()
+				.findFirst()
+				.get();
+			    
+				
+		return "Quantidade de clientes no arquivo de entrada: " + numberOfCustomer + "\n"
+				+ "Quantidade de vendedores no arquivo de entrada: " + numberOfSalesman + "\n"
+				+ "ID da venda mais cara: " + mostExpensiveSale.getSaleId() + "\n"
+				+ "O pior vendedor: " + worstSalesman.getKey();
 	}
 
 	@Override

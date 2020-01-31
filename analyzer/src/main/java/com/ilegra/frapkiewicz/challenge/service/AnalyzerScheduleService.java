@@ -36,15 +36,21 @@ public class AnalyzerScheduleService {
 	
 	private void daoWrite(SalesReport report) {
 		System.out.println("-------------RELATÓRIO--------------");
-		System.out.println(report);
+		System.out.println(report.getResume());
 		System.out.println("------------------------------------");
 	}
 
 	private List<String> daoRead(){
 		List<String> rowsOfFile = new ArrayList<String>();
 		rowsOfFile.add("001ç1234567891234çPedroç50000");
+		rowsOfFile.add("001ç3245678865434çPauloç40000.99");
 		rowsOfFile.add("002ç2345675434544345çJose da SilvaçRural");
+		rowsOfFile.add("002ç2345675433444345çEduardo PereiraçRural");
 		rowsOfFile.add("003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro");
+		
+		rowsOfFile.add("003ç07ç[1-34-10,2-33-1.40,3-40-0.10]çMateus");
+		
+		rowsOfFile.add("003ç08ç[1-34-10,2-33-1.50,3-40-0.10]çPaulo");
 		return rowsOfFile;
 	}
 }

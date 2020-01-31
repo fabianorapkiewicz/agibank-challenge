@@ -19,6 +19,10 @@ public class SaleItem {
 		setQuantity(quantity);
 		setPrice(price);
 	}
+	
+	public Double getTotalSalesValue() {
+		return quantity * price;
+	}
 
 	public Long getIdItem() {
 		return idItem;
