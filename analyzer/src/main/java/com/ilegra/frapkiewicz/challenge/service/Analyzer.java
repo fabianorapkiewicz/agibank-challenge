@@ -3,7 +3,6 @@ package com.ilegra.frapkiewicz.challenge.service;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ilegra.frapkiewicz.challenge.report.SalesReport;
@@ -16,16 +15,13 @@ import com.ilegra.frapkiewicz.challenge.report.writter.SalesmanWritter;
 @Component
 public class Analyzer {
 	
-	private SalesReport report;
-
 	private List<ReportWritter> witterList;
 	
 	public Analyzer() {
-		report = new SalesReportImp();
 		witterList = new ArrayList<ReportWritter>();
-		attach(new SalesmanWritter(report));
-		attach(new CustomerWritter(report));
-		attach(new SaleWritter(report));
+		attach(new SalesmanWritter());
+		attach(new CustomerWritter());
+		attach(new SaleWritter());
 	}
 	
 	public void attach(ReportWritter writter) {
@@ -36,19 +32,17 @@ public class Analyzer {
 		witterList.remove(writter);		
 	}
 	
-	public void setEvent(String event) {
-		notifyAllWritters(event);
+	public SalesReport analyze(List<String> rowsOfFile) {
+		SalesReport report = new SalesReportImp();
+		rowsOfFile.forEach( row -> notifyAllWritters(row, report) );
+		return report;
 	}
 	
-	public void notifyAllWritters(String event) {
+	public void notifyAllWritters(String event, SalesReport report) {
 		witterList.stream()
 			.parallel()
 			.forEach( writter -> {
-				writter.update(event);
+				writter.update(report, event);
 			});
-	}
-	
-	public SalesReport getReport() {
-		return report;
 	}
 }

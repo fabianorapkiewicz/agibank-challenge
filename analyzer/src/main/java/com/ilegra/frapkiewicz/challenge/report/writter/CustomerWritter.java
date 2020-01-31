@@ -4,28 +4,27 @@ import java.util.Optional;
 import java.util.function.Consumer;
 
 import com.ilegra.frapkiewicz.challenge.model.Customer;
+import com.ilegra.frapkiewicz.challenge.model.Salesman;
 import com.ilegra.frapkiewicz.challenge.report.SalesReport;
 
 public class CustomerWritter extends ReportWritter{
 	
-	public CustomerWritter(SalesReport report) {
-		super(report);
-	}
+//	public CustomerWritter(SalesReport report) {
+//		super(report);
+//	}
+//
+//	public void update(String rowData) {
+//		Optional.ofNullable(Customer.from(rowData))
+//			.ifPresent( customer -> getReport().add(customer) );
+//	}
 
-	public void update(String rowData) {
-		Optional.ofNullable(Customer.from(rowData))
-			.ifPresent( customer -> getReport().add(customer) );
+	@Override
+	protected Customer getReportData(String rowData) {
+		return Customer.from(rowData);
 	}
 
 	@Override
-	protected <T> T getReportData(String rowData) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-	@Override
-	protected <T> Consumer<T> updateReportB(SalesReport report) {
-		// TODO Auto-generated method stub
-		return null;
+	protected Consumer<Customer> updateReport(SalesReport report) {
+		return customer -> report.add(customer);
 	}
 }

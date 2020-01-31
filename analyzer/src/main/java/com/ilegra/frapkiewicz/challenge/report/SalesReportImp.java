@@ -24,6 +24,11 @@ public class SalesReportImp implements SalesReport {
 	}
 	
 	@Override
+	public boolean hasContent() {
+		return !(salesmanList.isEmpty() && customerList.isEmpty() && saleList.isEmpty());
+	}
+	
+	@Override
 	public void add(Salesman salesman) {
 		salesmanList.add(salesman);
 	}
@@ -43,7 +48,4 @@ public class SalesReportImp implements SalesReport {
 		return "SalesReportImp [salesmanList=" + salesmanList + ", customerList=" + customerList + ", saleList="
 				+ saleList + "]";
 	}
-	
-	
-
 }

@@ -2,12 +2,13 @@ package com.ilegra.frapkiewicz.challenge.service;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+
+import com.ilegra.frapkiewicz.challenge.report.SalesReport;
 
 
 @Component
@@ -23,21 +24,27 @@ public class AnalyzerScheduleService {
 	public void run() {
 		System.out.println("INICIO DE CLICO");
 		
-		List<String> events = new ArrayList<String>();
-		events.add("001ç1234567891234çPedroç50000");
-		events.add("002ç2345675434544345çJose da SilvaçRural");
-		events.add("003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro");
+		List<String> rowsOfFile = daoRead();
 		
-		events.forEach(processEvents(analyzer));
+		SalesReport report = analyzer.analyze(rowsOfFile);
 		
-		System.out.println("-------------RELATÓRIO--------------");
-		System.out.println(analyzer.getReport());
-		System.out.println("------------------------------------");
+		if(report.hasContent())
+			daoWrite(report);
 		
 		System.out.println("FIM DE CLICO");
 	}
 	
-	public Consumer<String> processEvents(Analyzer analyzer){
-		return event -> analyzer.setEvent(event);
+	private void daoWrite(SalesReport report) {
+		System.out.println("-------------RELATÓRIO--------------");
+		System.out.println(report);
+		System.out.println("------------------------------------");
+	}
+
+	private List<String> daoRead(){
+		List<String> rowsOfFile = new ArrayList<String>();
+		rowsOfFile.add("001ç1234567891234çPedroç50000");
+		rowsOfFile.add("002ç2345675434544345çJose da SilvaçRural");
+		rowsOfFile.add("003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro");
+		return rowsOfFile;
 	}
 }
