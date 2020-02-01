@@ -10,25 +10,28 @@ import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.ilegra.frapkiewicz.challenge.AnalyzerProperties;
 import com.ilegra.frapkiewicz.challenge.report.SalesReport;
 
 @Component
 public class Repository {
 
-	private final String homePath;
-	private final Path pathDataIn;
-	private final Path pathDataOut;
-	private final String extensionIn;
-	private final String extensionOut;
+	private String homePath;
+	private Path pathDataIn;
+	private Path pathDataOut;	
+	private String extensionIn;	
+	private String extensionOut;
 	
-	public Repository() throws IOException {
-		extensionIn = ".dat";
-		extensionOut = ".done.dat";
+	@Autowired
+	public Repository(AnalyzerProperties properties) throws IOException {
 		homePath = System.getProperty("user.home");
-		pathDataIn = Paths.get(homePath + "/data/in");
-		pathDataOut = Paths.get(homePath + "/data/out");
+		extensionIn = properties.getExtensionIn();	
+		extensionOut = properties.getExtensionOut();
+		pathDataIn = Paths.get(homePath + properties.getInputPath());
+		pathDataOut = Paths.get(homePath + properties.getOutputPath());
 		
 		if(!Files.exists(pathDataIn))
 			Files.createDirectories(pathDataIn);
