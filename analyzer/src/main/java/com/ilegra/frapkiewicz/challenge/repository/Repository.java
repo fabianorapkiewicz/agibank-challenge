@@ -1,6 +1,5 @@
 package com.ilegra.frapkiewicz.challenge.repository;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -16,13 +15,30 @@ import org.springframework.stereotype.Component;
 @Component
 public class Repository {
 
-	private String path = "/home/ilegra/DATA_IN/";
-	private String extension = ".dat";
+	private final String homePath;
+	private final Path pathDataIn;
+	private final Path pathDataOut;
+	private final String extension;
+	
+	
+	public Repository() throws IOException {
+		extension = ".dat";
+		homePath = System.getProperty("user.home");
+		pathDataIn = Paths.get(homePath + "/data/in");
+		pathDataOut = Paths.get(homePath + "/data/out");
+		
+		if(!Files.exists(pathDataIn))
+			Files.createDirectories(pathDataIn);
+		
+		if(!Files.exists(pathDataOut))
+			Files.createDirectories(pathDataOut);
+	}
+	
 	
 	public List<String> getSalesData() {
 		List<String> files = new ArrayList<String>();
 		
-		getAllDataFilePath().parallelStream().forEach( readFileInto(files) );
+		getAllDataFilePath().parallelStream().forEach( cutAndPastInto(files) );
 		
 		return files;
 	}
@@ -34,7 +50,7 @@ public class Repository {
 	}
 
 	private List<String> getAllDataFilePath() {
-		try(Stream<Path> walk = Files.walk(Paths.get(path))){
+		try(Stream<Path> walk = Files.walk(pathDataIn)){
 			 return walk.filter(Files::isRegularFile)
 					 .filter(fullFileName -> fullFileName.toString().endsWith(extension))
 					 .map(Path::toString)
@@ -45,10 +61,12 @@ public class Repository {
 		}
 	}
 	
-	private Consumer<String> readFileInto(List<String> files){
-		return pathOfFile -> {
+	private Consumer<String> cutAndPastInto(List<String> files){
+		return filePathText -> {
 			try {
-				files.addAll( Files.readAllLines( Paths.get(pathOfFile)) );
+				Path filePath = Paths.get(filePathText);
+				files.addAll( Files.readAllLines( filePath ) );
+				Files.delete(filePath);
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
