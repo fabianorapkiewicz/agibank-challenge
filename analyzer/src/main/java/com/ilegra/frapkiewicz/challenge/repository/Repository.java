@@ -20,11 +20,12 @@ public class Repository {
 	private final String homePath;
 	private final Path pathDataIn;
 	private final Path pathDataOut;
-	private final String extension;
-	
+	private final String extensionIn;
+	private final String extensionOut;
 	
 	public Repository() throws IOException {
-		extension = ".dat";
+		extensionIn = ".dat";
+		extensionOut = ".done.dat";
 		homePath = System.getProperty("user.home");
 		pathDataIn = Paths.get(homePath + "/data/in");
 		pathDataOut = Paths.get(homePath + "/data/out");
@@ -46,7 +47,7 @@ public class Repository {
 	}
 
 	public void save(SalesReport report){
-		 Path fullPathDataOut = Paths.get( pathDataOut + "/" + report.getName() +".done.dat");
+		 Path fullPathDataOut = Paths.get( pathDataOut + "/" + report.getName() + extensionOut);
 		try {
 			Files.write(fullPathDataOut, report.getResume().getBytes());
 		} catch (IOException e) {
@@ -57,7 +58,7 @@ public class Repository {
 	private List<String> getAllDataFilePath() {
 		try(Stream<Path> walk = Files.walk(pathDataIn)){
 			 return walk.filter(Files::isRegularFile)
-					 .filter(fullFileName -> fullFileName.toString().endsWith(extension))
+					 .filter(fullFileName -> fullFileName.toString().endsWith(extensionIn))
 					 .map(Path::toString)
 					 .collect(Collectors.toList());
 		}catch (IOException e) {
