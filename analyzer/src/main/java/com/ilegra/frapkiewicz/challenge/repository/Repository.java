@@ -13,7 +13,7 @@ import java.util.stream.Stream;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.ilegra.frapkiewicz.challenge.AnalyzerProperties;
+import com.ilegra.frapkiewicz.challenge.config.AnalyzerProperties;
 import com.ilegra.frapkiewicz.challenge.report.SalesReport;
 
 @Component
