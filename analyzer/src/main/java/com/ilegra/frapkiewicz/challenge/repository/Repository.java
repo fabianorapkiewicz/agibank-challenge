@@ -12,6 +12,8 @@ import java.util.stream.Stream;
 
 import org.springframework.stereotype.Component;
 
+import com.ilegra.frapkiewicz.challenge.report.SalesReport;
+
 @Component
 public class Repository {
 
@@ -43,10 +45,13 @@ public class Repository {
 		return files;
 	}
 
-	public void save(String resume) {
-		System.out.println("-------------RELATÓRIO--------------");
-		System.out.println(resume);
-		System.out.println("------------------------------------");
+	public void save(SalesReport report){
+		 Path fullPathDataOut = Paths.get( pathDataOut + "/" + report.getName() +".done.dat");
+		try {
+			Files.write(fullPathDataOut, report.getResume().getBytes());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private List<String> getAllDataFilePath() {

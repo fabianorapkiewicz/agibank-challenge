@@ -1,5 +1,7 @@
 package com.ilegra.frapkiewicz.challenge.report;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
@@ -15,15 +17,22 @@ import com.ilegra.frapkiewicz.challenge.model.Salesman;
 @Component
 public class SalesReportImp implements SalesReport {
 
+	private String name;
 	private List<Salesman> salesmanList;
 	private List<Customer> customerList;
 	private List<Sale> saleList;
 	
 	
 	public SalesReportImp() {
+		name = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		salesmanList = new ArrayList<Salesman>();
 		customerList = new ArrayList<Customer>();
 		saleList = new ArrayList<Sale>();
+	}
+	
+	@Override
+	public String getName() {
+		return name;
 	}
 	
 	@Override
