@@ -1,19 +1,15 @@
 package com.ilegra.frapkiewicz.challenge.report.writter;
 
-import java.util.function.Consumer;
+import java.util.Optional;
 
 import com.ilegra.frapkiewicz.challenge.model.Sale;
 import com.ilegra.frapkiewicz.challenge.report.SalesReport;
 
-public class SaleWritter extends ReportWritter{
+public class SaleWritter implements ReportWritter{
 
 	@Override
-	protected Sale getReportData(String rowData) {
-		return Sale.from(rowData);
-	}
-
-	@Override
-	protected Consumer<Sale> updateReport(SalesReport report) {
-		return sale -> report.add(sale);
+	public void update(SalesReport report, String rowData) {
+		Optional.ofNullable(Sale.from(rowData))
+		.ifPresent( sale -> report.add(sale));
 	}
 }
