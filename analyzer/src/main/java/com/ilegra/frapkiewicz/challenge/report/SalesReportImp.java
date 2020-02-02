@@ -14,7 +14,6 @@ import com.ilegra.frapkiewicz.challenge.model.Salesman;
 @Component
 public class SalesReportImp implements SalesReport {
 
-	private String name;
 	private List<Salesman> salesmanList;
 	private List<Customer> customerList;
 	private List<Sale> saleList;
@@ -26,11 +25,6 @@ public class SalesReportImp implements SalesReport {
 		customerList = new ArrayList<Customer>();
 		saleList = new ArrayList<Sale>();
 		salesResult = new SalesReportResultImp();
-	}
-	
-	@Override
-	public String getName() {
-		return name;
 	}
 	
 	@Override
