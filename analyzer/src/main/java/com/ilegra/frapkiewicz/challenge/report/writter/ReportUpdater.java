@@ -2,7 +2,7 @@ package com.ilegra.frapkiewicz.challenge.report.writter;
 
 import com.ilegra.frapkiewicz.challenge.report.SalesReport;
 
-public interface ReportWritter {
+public interface ReportUpdater {
 	
-	public void update(SalesReport report, String rowData);
+	public void updateReport(SalesReport report, String rowData);
 }

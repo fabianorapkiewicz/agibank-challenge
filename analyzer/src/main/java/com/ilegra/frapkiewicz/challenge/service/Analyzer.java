@@ -8,41 +8,41 @@ import org.springframework.stereotype.Component;
 import com.ilegra.frapkiewicz.challenge.report.SalesReport;
 import com.ilegra.frapkiewicz.challenge.report.SalesReportImp;
 import com.ilegra.frapkiewicz.challenge.report.writter.CustomerWritter;
-import com.ilegra.frapkiewicz.challenge.report.writter.ReportWritter;
-import com.ilegra.frapkiewicz.challenge.report.writter.SaleWritter;
-import com.ilegra.frapkiewicz.challenge.report.writter.SalesmanWritter;
+import com.ilegra.frapkiewicz.challenge.report.writter.ReportUpdater;
+import com.ilegra.frapkiewicz.challenge.report.writter.SaleUpdater;
+import com.ilegra.frapkiewicz.challenge.report.writter.SalesmanUpdater;
 
 @Component
 public class Analyzer {
 	
-	private List<ReportWritter> witterList;
+	private List<ReportUpdater> updaterList;
 	
 	public Analyzer() {
-		witterList = new ArrayList<ReportWritter>();
-		attach(new SalesmanWritter());
+		updaterList = new ArrayList<ReportUpdater>();
+		attach(new SalesmanUpdater());
 		attach(new CustomerWritter());
-		attach(new SaleWritter());
+		attach(new SaleUpdater());
 	}
 	
-	public void attach(ReportWritter writter) {
-		witterList.add(writter);		
+	public void attach(ReportUpdater writter) {
+		updaterList.add(writter);		
 	}
 	
-	public void dettach(ReportWritter writter) {
-		witterList.remove(writter);		
+	public void dettach(ReportUpdater writter) {
+		updaterList.remove(writter);		
 	}
 	
 	public SalesReport analyze(List<String> rowsOfFile) {
 		SalesReport report = new SalesReportImp();
-		rowsOfFile.forEach( row -> notifyAllWritters(row, report) );
+		rowsOfFile.forEach( row -> notifyAllUpdaters(row, report) );
 		return report;
 	}
 	
-	public void notifyAllWritters(String event, SalesReport report) {
-		witterList.stream()
+	public void notifyAllUpdaters(String newData, SalesReport report) {
+		updaterList.stream()
 			.parallel()
-			.forEach( writter -> {
-				writter.update(report, event);
+			.forEach( updater -> {
+				updater.updateReport(report, newData);
 			});
 	}
 }
