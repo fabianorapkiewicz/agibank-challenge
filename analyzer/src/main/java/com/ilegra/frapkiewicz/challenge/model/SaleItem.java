@@ -8,12 +8,6 @@ public class SaleItem {
 	public SaleItem() {
 	}
 	
-	protected SaleItem(String[] elements) {
-		setIdItem(Long.valueOf(elements[0]));
-		setQuantity(Integer.valueOf(elements[1]));
-		setPrice(Double.valueOf(elements[2]));
-	}
-	
 	public SaleItem(Long idItem, Integer quantity, Double price) {
 		setIdItem(idItem);
 		setQuantity(quantity);
@@ -46,11 +40,6 @@ public class SaleItem {
 
 	public void setPrice(Double price) {
 		this.price = price;
-	}
-	
-	public static SaleItem from(String data) {
-		String[] elements = data.split("-");
-		return new SaleItem(elements);
 	}
 
 	@Override

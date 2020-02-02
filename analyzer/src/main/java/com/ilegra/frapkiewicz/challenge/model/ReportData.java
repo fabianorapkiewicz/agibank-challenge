@@ -1,6 +1,5 @@
 package com.ilegra.frapkiewicz.challenge.model;
 
-public class ReportData {
+public interface ReportData{
 
-	protected static final String REGEX_DELIMITER = "ç";
 }
