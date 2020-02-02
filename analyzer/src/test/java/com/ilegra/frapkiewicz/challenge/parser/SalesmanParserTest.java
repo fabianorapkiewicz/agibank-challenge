@@ -24,7 +24,6 @@ class SalesmanParserTest {
 
 	@Test
 	void testWithValidValue() {
-		
 		Salesman salesman = new Salesman();
 		salesman.setId("001");
 		salesman.setCpf("1234567891234");
