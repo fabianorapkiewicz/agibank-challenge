@@ -14,7 +14,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.ilegra.frapkiewicz.challenge.config.AnalyzerProperties;
-import com.ilegra.frapkiewicz.challenge.report.SalesReport;
+import com.ilegra.frapkiewicz.challenge.report.SalesReportResult;
 
 @Component
 public class Repository {
@@ -49,10 +49,10 @@ public class Repository {
 		return files;
 	}
 
-	public void save(SalesReport report){
-		 Path fullPathDataOut = Paths.get( pathDataOut + "/" + report.getName() + extensionOut);
+	public void save(SalesReportResult report){
+		 Path fullPathDataOut = Paths.get( pathDataOut + "/" + report.getTimestamp() + extensionOut);
 		try {
-			Files.write(fullPathDataOut, report.getResume().getBytes());
+			Files.write(fullPathDataOut, report.getSummary().getBytes());
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

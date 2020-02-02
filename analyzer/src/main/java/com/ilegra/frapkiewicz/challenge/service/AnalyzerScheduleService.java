@@ -31,8 +31,8 @@ public class AnalyzerScheduleService {
 		
 		SalesReport report = analyzer.analyze(rowsOfFile);
 		
-		if(report.hasContent())
-			repository.save(report);
+		if(report.hasResults())
+			repository.save(report.getResults());
 		
 		System.out.println("FIM DE CLICO");
 	}

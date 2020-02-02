@@ -1,11 +1,8 @@
 package com.ilegra.frapkiewicz.challenge.report;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Map.Entry;
 import java.util.stream.Collectors;
 
 import org.springframework.stereotype.Component;
@@ -21,13 +18,14 @@ public class SalesReportImp implements SalesReport {
 	private List<Salesman> salesmanList;
 	private List<Customer> customerList;
 	private List<Sale> saleList;
+	private SalesReportResultsImp salesResult;
 	
 	
 	public SalesReportImp() {
-		name = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss"));
 		salesmanList = new ArrayList<Salesman>();
 		customerList = new ArrayList<Customer>();
 		saleList = new ArrayList<Sale>();
+		salesResult = new SalesReportResultsImp();
 	}
 	
 	@Override
@@ -36,7 +34,7 @@ public class SalesReportImp implements SalesReport {
 	}
 	
 	@Override
-	public boolean hasContent() {
+	public boolean hasResults() {
 		return !(salesmanList.isEmpty() && customerList.isEmpty() && saleList.isEmpty());
 	}
 	
@@ -56,31 +54,33 @@ public class SalesReportImp implements SalesReport {
 	}
 	
 	@Override
-	public String getResume() {
+	public SalesReportResult getResults() {
+		salesResult.setNumberOfSalesman(salesmanList.size());
+		salesResult.setNumberOfCustomer(customerList.size());
+		salesResult.setIdMostExpensiveSale(findTheMostExpansiveSaleId());
+		salesResult.setWorstSalesman(findSalesmanNameWithLessSalesFrequency());
 		
-		Integer numberOfSalesman = salesmanList.size();
-		Integer numberOfCustomer = customerList.size();
-		
-		Sale mostExpensiveSale = saleList.stream()
+		return salesResult;				
+	}
+	
+	private Long findTheMostExpansiveSaleId() {
+		return saleList.stream()
 				.sorted(Comparator.comparing(Sale::getSalesValue)
 						.reversed())
 				.collect(Collectors.toList())
 				.stream()
+				.map(Sale::getSaleId)
 				.findFirst()
-				.get();
-				
-		Entry<String, Long> worstSalesman = saleList.stream()
+				.orElse(0l);
+	}
+	
+	private String findSalesmanNameWithLessSalesFrequency() {
+		return saleList.stream()
 				.collect(Collectors.groupingBy(Sale::getSalesname , Collectors.counting()))
-				.entrySet()
+				.keySet()
 				.stream()
 				.findFirst()
-				.get();
-			    
-				
-		return "Quantidade de clientes no arquivo de entrada: " + numberOfCustomer + "\n"
-				+ "Quantidade de vendedores no arquivo de entrada: " + numberOfSalesman + "\n"
-				+ "ID da venda mais cara: " + mostExpensiveSale.getSaleId() + "\n"
-				+ "O pior vendedor: " + worstSalesman.getKey();
+				.orElse("");
 	}
 
 	@Override
