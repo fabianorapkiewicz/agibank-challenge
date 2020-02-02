@@ -7,8 +7,6 @@ public class SaleWritter implements ReportWritter{
 
 	@Override
 	public void update(SalesReport report, String rowData) {
-		SaleParser parser = new SaleParser();
-		if(parser.isValid(rowData))
-			report.add(parser.parse(rowData));
+		new SaleParser().tryParse(rowData).ifPresent( sale -> report.add(sale));
 	}
 }

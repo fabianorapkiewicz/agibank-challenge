@@ -21,7 +21,7 @@ public class SalesmanParser extends ReportDataParser<Salesman> {
 	}
 	
 	@Override
-	public Salesman parse(String value) {
+	protected Salesman parse(String value) {
 		String[] elements = value.split(REGEX_DELIMITER);
 		
 		Salesman salesman = new Salesman();

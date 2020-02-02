@@ -28,7 +28,7 @@ public class SaleParser extends ReportDataParser<Sale> {
 
 
 	@Override
-	public Sale parse(String data) {
+	protected Sale parse(String data) {
 		String[] elements = data.split(REGEX_DELIMITER);
 		
 		Sale sale = new Sale();

@@ -25,7 +25,7 @@ public class CustomerParser extends ReportDataParser<Customer> {
 	}
 
 	@Override
-	public Customer parse(String data) {
+	protected Customer parse(String data) {
 		String[] elements = data.split(REGEX_DELIMITER);
 		
 		Customer customer = new Customer();
