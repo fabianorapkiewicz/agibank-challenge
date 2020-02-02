@@ -4,7 +4,7 @@ import java.text.MessageFormat;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
-public class SalesReportResultsImp implements SalesReportResult {
+public class SalesReportResultImp implements SalesReportResult {
 	
 	private Integer numberOfSalesman;
 	private Integer numberOfCustomer;
@@ -13,7 +13,7 @@ public class SalesReportResultsImp implements SalesReportResult {
 	private String summary;
 	private String timestamp;
 
-	public SalesReportResultsImp() {
+	public SalesReportResultImp() {
 		setNumberOfSalesman(0);
 		setNumberOfCustomer(0);
 		setIdMostExpensiveSale(0l);
@@ -95,7 +95,7 @@ public class SalesReportResultsImp implements SalesReportResult {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		SalesReportResultsImp other = (SalesReportResultsImp) obj;
+		SalesReportResultImp other = (SalesReportResultImp) obj;
 		if (idMostExpensiveSale == null) {
 			if (other.idMostExpensiveSale != null)
 				return false;

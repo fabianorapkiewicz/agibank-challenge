@@ -15,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.ilegra.frapkiewicz.challenge.report.SalesReport;
-import com.ilegra.frapkiewicz.challenge.report.SalesReportResultsImp;
+import com.ilegra.frapkiewicz.challenge.report.SalesReportResultImp;
 
 @SpringBootTest
 class AnalyzerTest {
@@ -43,7 +43,7 @@ class AnalyzerTest {
 
 	@Test
 	void testValidInputFileAnalysis() {				
-		SalesReportResultsImp results = new SalesReportResultsImp();
+		SalesReportResultImp results = new SalesReportResultImp();
 		results.setNumberOfCustomer(2);
 		results.setNumberOfSalesman(2);
 		results.setIdMostExpensiveSale(10l);
@@ -62,7 +62,7 @@ class AnalyzerTest {
 		SalesReport report = analyzer.analyze(rowsOfFile);
 		
 		assertFalse(report.hasResults());
-		assertEquals(new SalesReportResultsImp(), report.getResults());
+		assertEquals(new SalesReportResultImp(), report.getResults());
 	}
 	
 	@Test
@@ -76,7 +76,7 @@ class AnalyzerTest {
 		SalesReport report = analyzer.analyze(rowsOfFile);
 		
 		assertFalse(report.hasResults());
-		assertEquals(new SalesReportResultsImp(), report.getResults());
+		assertEquals(new SalesReportResultImp(), report.getResults());
 	}
 	
 	@Test
@@ -84,7 +84,7 @@ class AnalyzerTest {
 		rowsOfFile.add("jkjskdj;;;dkjkjsd");
 		Collections.shuffle(rowsOfFile);	
 		
-		SalesReportResultsImp results = new SalesReportResultsImp();
+		SalesReportResultImp results = new SalesReportResultImp();
 		results.setNumberOfCustomer(2);
 		results.setNumberOfSalesman(2);
 		results.setIdMostExpensiveSale(10l);

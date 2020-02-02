@@ -18,14 +18,14 @@ public class SalesReportImp implements SalesReport {
 	private List<Salesman> salesmanList;
 	private List<Customer> customerList;
 	private List<Sale> saleList;
-	private SalesReportResultsImp salesResult;
+	private SalesReportResultImp salesResult;
 	
 	
 	public SalesReportImp() {
 		salesmanList = new ArrayList<Salesman>();
 		customerList = new ArrayList<Customer>();
 		saleList = new ArrayList<Sale>();
-		salesResult = new SalesReportResultsImp();
+		salesResult = new SalesReportResultImp();
 	}
 	
 	@Override
