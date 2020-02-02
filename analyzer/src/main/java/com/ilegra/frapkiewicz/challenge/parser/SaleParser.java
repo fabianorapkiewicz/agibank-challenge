@@ -11,7 +11,7 @@ public class SaleParser extends ReportDataParser<Sale> {
 	private static final String REGEX_SALE_ID = "\\d{2}";
 	private static final String REGEX_DELIMITER = "ç";
 	private static final String REGEX_NAME = "[A-Z][a-z]*";
-	private static final String REGEX_SALARY = "\\d[0-9]*+(\\.[0-9]{2}+)?";//$";
+	private static final String REGEX_SALARY = "\\d[0-9]*+(\\.[0-9]{2}+)?";
 	private static final String REGEX_ITEM = "\\d[0-9]*\\-\\d[0-9]*\\-"+ REGEX_SALARY;
 	private static final String REGEX_LIST_ITEM = "\\["+ REGEX_ITEM +"(,"+ REGEX_ITEM +")*\\]";
 
