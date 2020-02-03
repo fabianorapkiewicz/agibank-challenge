@@ -1,11 +1,16 @@
 plugins {
 	id 'org.springframework.boot' version '2.2.4.RELEASE'
 	id 'io.spring.dependency-management' version '1.0.9.RELEASE'
+	id 'application'
 	id 'java'
 }
 
 group = 'com.ilegra.frapkiewicz.challenge'
-version = '0.0.1-SNAPSHOT'
+version = '0.0.1'
+
+
+mainClassName = "com.ilegra.frapkiewicz.challenge.AnalyzerApplication"
+
 
 sourceCompatibility = '1.8'
 
