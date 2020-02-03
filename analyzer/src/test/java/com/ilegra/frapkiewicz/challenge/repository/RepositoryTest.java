@@ -18,6 +18,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.util.FileSystemUtils;
 
 import com.ilegra.frapkiewicz.challenge.config.AnalyzerProperties;
+import com.ilegra.frapkiewicz.challenge.report.SalesReportResult;
+import com.ilegra.frapkiewicz.challenge.report.SalesReportResultImp;
 
 class RepositoryTest {
 
@@ -81,6 +83,27 @@ class RepositoryTest {
 		List<String> salesData = repository.getSalesData();
 		
 		assertTrue(salesData.isEmpty());
+	}
+	
+	void testSaveReportResult() throws IOException {		
+		SalesReportResultImp reportResult = new SalesReportResultImp();
+		reportResult.setIdMostExpensiveSale(10l);
+		reportResult.setNumberOfCustomer(3);
+		reportResult.setNumberOfSalesman(2);
+		reportResult.setWorstSalesman("fabiano");
+		
+		String pathBase = properties.getBasePath() + properties.getOutputPath();
+		
+		Path path = Paths.get(pathBase);
+		FileSystemUtils.deleteRecursively(path);
+		
+		assertFalse(Files.exists(path));
+		
+		Repository repository = new Repository(properties);
+		repository.save(reportResult);
+		
+		path = Paths.get(pathBase + "/" + reportResult.getTimestamp());
+		assertTrue(Files.exists(path));
 	}
 
 }
