@@ -25,16 +25,18 @@ Os dados do cliente possuem o identificador 002 e seguem o seguinte formato:
 Os dados de venda possuem o identificador 003 e seguem o seguinte formato:
  - 003çSale IDç[Item ID-Item Quantity-Item Price]çSalesman name
  
-
-## Pré requisitos para rodar aplicação
-- JRE 8 instalado na máquina
-
-## Para rodar aplicação
-Bata acessar o diretório /analyzer e digitar via terminal executar o comando *./gradlew run*
-
 ## Tecnologias utilizadas
 - Java 8
 - SpringBoot
 - Junit
 - Gradle
+
+## Pré requisitos para rodar aplicação
+- JRE 8 instalado na máquina
+
+## Para rodar aplicação
+Bata acessar o diretório **/analyzer** e digitar via terminal executar o comando:
+```
+./gradlew run
+```
 
