@@ -1,4 +1,4 @@
-# Desafio Relatório de Análide de Vendas
+# Relatório de Análide de Vendas
 O sistema deverá ler continuamente todos os arquivos dentro do diretório padrão HOMEPATH/data/in e colocar o arquivo de saída 
 em HOMEPATH/data/out.
 
