@@ -27,7 +27,11 @@ public class Repository {
 	
 	@Autowired
 	public Repository(AnalyzerProperties properties) throws IOException {
-		homePath = System.getProperty("user.home");
+		if( properties.getUseHomePath() )
+			homePath = System.getProperty("user.home");
+		else
+			homePath = properties.getBasePath();
+			
 		extensionIn = properties.getExtensionIn();	
 		extensionOut = properties.getExtensionOut();
 		pathDataIn = Paths.get(homePath + properties.getInputPath());

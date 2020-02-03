@@ -17,6 +17,12 @@ public class AnalyzerProperties {
 	
 	@Value("${output.path}")
 	private String outputPath;
+	
+	@Value("${base-path.use.homepath}")
+	private Boolean useHomePath;
+	
+	@Value("${base-path.use}")
+	private String basePath;
 
 	public String getExtensionIn() {
 		return extensionIn;
@@ -48,5 +54,21 @@ public class AnalyzerProperties {
 
 	public void setOutputPath(String outputPath) {
 		this.outputPath = outputPath;
+	}
+
+	public Boolean getUseHomePath() {
+		return useHomePath;
+	}
+
+	public void setUseHomePath(Boolean useHomePath) {
+		this.useHomePath = useHomePath;
+	}
+
+	public String getBasePath() {
+		return basePath;
+	}
+
+	public void setBasePath(String basePath) {
+		this.basePath = basePath;
 	}
 }
