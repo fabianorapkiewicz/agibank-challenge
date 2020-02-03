@@ -1,12 +1,15 @@
 package com.ilegra.frapkiewicz.challenge.repository;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.Arrays;
 import java.util.List;
 
 import org.junit.jupiter.api.AfterEach;
@@ -50,9 +53,33 @@ class RepositoryTest {
 	}
 	
 	@Test
+	void testGetSalesDataFromInputFile() throws IOException {
+		String pathTestFiles = properties.getBasePath() + "/test-files";
+		String pathInputFiles = properties.getBasePath() + properties.getInputPath();
+
+		List<String> contentOfFiles = Arrays.asList(
+				"001ç1234567891234çPedroç50000", 
+				"001ç3245678865434çPauloç40000.99", 
+				"002ç2345675434544345çJose da SilvaçRural", 
+				"002ç2345675433444345çEduardo PereiraçRural",
+				"003ç10ç[1-10-100,2-30-2.50,3-40-3.10]çPedro", 
+				"003ç08ç[1-34-10,2-33-1.50,3-40-0.10]çPaulo");
+		
+		Repository repository = new Repository(properties);
+		
+		FileSystemUtils.copyRecursively( 
+				new File(pathTestFiles), 
+				new File(pathInputFiles));
+
+		assertEquals(repository.getSalesData(), contentOfFiles);
+	}
+	
+	@Test
 	void testWhenThereAreNoInputFiles() throws IOException {
 		Repository repository = new Repository(properties);
+		
 		List<String> salesData = repository.getSalesData();
+		
 		assertTrue(salesData.isEmpty());
 	}
 
