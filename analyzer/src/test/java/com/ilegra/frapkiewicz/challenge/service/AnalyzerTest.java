@@ -11,22 +11,19 @@ import java.util.List;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
 
 import com.ilegra.frapkiewicz.challenge.report.SalesReport;
 import com.ilegra.frapkiewicz.challenge.report.SalesReportResultImp;
 
-@SpringBootTest
 class AnalyzerTest {
 	
-	@Autowired
 	private Analyzer analyzer;
 	
 	private List<String> rowsOfFile;
 	
 	@BeforeEach
 	void setUp() throws Exception {
+		analyzer = new Analyzer();
 		rowsOfFile = new ArrayList<String>();
 		rowsOfFile.add("001ç1234567891234çPedroç50000");
 		rowsOfFile.add("001ç3245678865434çPauloç40000.99");

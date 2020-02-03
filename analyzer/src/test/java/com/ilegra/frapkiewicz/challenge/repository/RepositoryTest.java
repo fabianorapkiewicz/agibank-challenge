@@ -18,7 +18,6 @@ import org.junit.jupiter.api.Test;
 import org.springframework.util.FileSystemUtils;
 
 import com.ilegra.frapkiewicz.challenge.config.AnalyzerProperties;
-import com.ilegra.frapkiewicz.challenge.report.SalesReportResult;
 import com.ilegra.frapkiewicz.challenge.report.SalesReportResultImp;
 
 class RepositoryTest {
